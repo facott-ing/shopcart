@@ -1,0 +1,48 @@
+extends layout
+
+block content
+    include extends/head
+    .row
+        .col-lg-12
+            .products-list
+                h1 Products list
+                table.table.table-striped.table-hover
+                    thead
+                        tr
+                            th(width="10%") #
+                            th(width="30%") Product Name
+                            th(width="5%") stock
+                            th(width="15%") Price
+                            th(width="20%") Quantity
+                            th(width="20%") Action
+                    tbody
+                        - count = 1
+                        -var cart = 111
+                        - if(cartobj != null){
+                            - cart = idcart
+                        -}
+                        each p in products
+
+                            tr
+                                form(action="/add", method="post")
+                                    td(width="10%") #{count}
+                                    td(width="30%") #{p.name}
+                                    td(width="5%") #{p.stock}
+                                    td(width="15%") $ #{p.price}.00
+                                    td(width="20%")
+                                        input(type="hidden", value="#{cart}", name="cart")
+                                        input(type="hidden", value="#{p.id}", name="product")
+                                        -if(p.stock > 0){
+                                            input(type="number", value="1", name="amount", min="1", max="#{p.stock}")
+                                        -}
+
+
+                                    td(width="20%")
+                                        -if(p.stock > 0){
+                                            button(type="submit") Buy
+                                        -}
+
+                            - count++
+
+
+

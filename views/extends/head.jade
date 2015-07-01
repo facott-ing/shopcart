@@ -1,0 +1,76 @@
+- var cntcart = 0
+-if(cartobj != null){
+    -cntcart = pic
+-}
+
+.row
+    nav.navbar.navbar-default
+        .container-fluid
+            .navbar-header
+                a(href="#").navbar-brand: strong.brand Shopping
+
+            .collapse.navbar-collapse
+                ul.nav.navbar-nav.navbar-right.btn-cart
+                    li.active
+                        .dropdown
+                            button(class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown")
+                                i.fa.fa-shopping-cart.fa-lg.i-span
+                                small items
+                                small.badge.i-span #{cntcart}
+                                span.caret
+
+                            ul(class="dropdown-menu" role="menu" aria-labelledby="menu1").ul-cart
+                                li.head
+                                    h4.text-center Cart items
+
+                                li.body
+                                    .boxin
+                                        -if(cntcart > 0){
+                                            table.table.table-striped.table-hover
+                                                thead
+                                                    tr
+                                                        th(width="60%") Name
+                                                        th(width="10%") Qua..
+                                                        th(width="20%") Price
+                                                        th(width="10%")
+
+                                                tbody
+
+                                                    each x in pdsincart
+                                                        tr
+                                                            td(width="60%") #{x.product.name}
+                                                            td(width="10%") #{x.amount}
+                                                            td(width="20%") $ #{x.price}
+                                                            td(width="10%")
+                                                                a(href="/remove/#{cartobj.id}/#{x.product._id}").text-danger
+                                                                    i.fa.fa-times
+                                        -}else{
+                                            h5.text-center.lead.text-muted The shopping cart is empty
+                                        -}
+
+
+                                li.footer
+                                    h4.text-marginleft
+                                        span.text-info Total Price:
+                                        -if(cntcart > 0){
+                                            span.i-span $ #{cartobj.totalprice}.00
+                                        -}else{
+                                            span.i-span $ 0.00
+                                        -}
+                                li.actionsbtn
+                                    table.table
+                                        tbody
+                                            tr
+                                                td(width="45%")
+                                                    -if(cntcart > 0){
+                                                        a(href="/removeall/#{cartobj.id}").btn.btn-danger.btn-xs Clear items
+                                                    -}else{
+                                                        a(href="#").btn.btn-danger.btn-xs.disabled Clear items
+                                                    -}
+                                                td(width="45%")
+                                                    -if(cntcart > 0){
+                                                        a(href="/sale").btn.btn-primary.btn-xs Buy items
+                                                    -}else{
+                                                        a(href="#").btn.btn-primary.btn-xs.disabled Buy items
+                                                    -}
+

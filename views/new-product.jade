@@ -1,0 +1,9 @@
+extends layout
+block content
+    .row
+        .col-xs-6
+            form(action="/new-prdt", method="post")
+                input(type="text", name="name", placeholder="product name")
+                input(type="number", name="amount", placeholder="product amount")
+                input(type="number", name="price", placeholder="product price")
+                button(type="submit") load product
